@@ -1,5 +1,7 @@
+#define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <stdio.h>
+#include <iostream>
 
 int main(void)
 {
@@ -11,7 +13,7 @@ int main(void)
 
     /* Create a windowed mode window and its OpenGL context */
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(800, 600, "Hello World", nullptr, nullptr);
     if (!window)
     {
         glfwTerminate();
@@ -19,7 +21,8 @@ int main(void)
     }
 
     uint32_t extensionCount = 0;
-    vkEnumerateInstanceExtensionProperties(NULL, &extensionCount);
+
+    vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
     printf("Extension Count %i\n", extensionCount);
 
     /* Make the window's context current */
