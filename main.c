@@ -1,4 +1,5 @@
 #include <GLFW/glfw3.h>
+#include <stdio.h>
 
 int main(void)
 {
@@ -9,12 +10,17 @@ int main(void)
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
         return -1;
     }
+
+    uint32_t extensionCount = 0;
+    vkEnumerateInstanceExtensionProperties(NULL, &extensionCount);
+    printf("Extension Count %i\n", extensionCount);
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
@@ -22,12 +28,6 @@ int main(void)
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
-
         /* Poll for and process events */
         glfwPollEvents();
     }
